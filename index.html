@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fake News Checker</title>
+        <link rel="stylesheet" type= "text/css" href="/static/css/style.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"></link>
+        <script type="text/javascript" src="/static/javascript.js"></script>
+    </head>
+    <body>
+      {% if post_data %}
+
+
+      
+      <div class="{{post_data}}">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <p> The content is considered as part of <strong> {{post_data}}</strong> news.</p>
+        </div>
+      {% endif %} 
+
+        
+
+        <img src="/static/images/logo.png"></img>
+
+        <form method="post", onsubmit="return validateForm()">
+            <textarea name="text_value" id="fileContent" placeholder="Paste your news article here..."></textarea>
+
+                <div class="button">
+                    <button type='submit' id="submit">
+                        <i class="fa fa-search" style="font-size:24px"></i>
+                    </button>
+                    <button type='button' id="clear" onclick="document.querySelector('textarea').value = '';">
+                  
+                        <i class="fa fa-terminal" style="font-size:24px; transform: scale(-1,1)"></i>
+                    </button>
+                </div>
+        </form>
+        <br>&nbsp;<br>
+        <div>
+            <label for="fileInput" class="custom-file-input" style="margin-left:-300px;"><i class="fas fa-file" style="font-size:30px"></i></label>
+            <input type="file" id="fileInput" style="display: none;">
+            <p id="filename" style="color: rgb(19, 19, 19); margin-left:-250px;font-weight: bold;">No text file selected</p>
+        </div>
+        
+        {% if post_data %}
+        <div class="info" id='box2'>
+          <h3 class='info'>&nbsp;more Info</h3>
+          <p style="padding: 0px 0px 0px 5px;">
+            Your news article contains <mark>{{ word }} {%if word == 1%}word {% else %} words {% endif %}</mark>,
+            And among them <mark>{{token}} {%if token == 1%} word {% else %} words{% endif %}</mark> {%if token == 1%} &nbsp;is {%else%} are {%endif%} matched to our model.
+          </p>
+        </div>
+        {% endif %}
+        
+    </body>
+</html>
